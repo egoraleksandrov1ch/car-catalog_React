@@ -1,6 +1,6 @@
 import React from 'react';
 import AddContainer from './addcontainer';
-
+import Container from './container';
 
 export default class Main extends React.Component {
     constructor (props) {
@@ -64,6 +64,9 @@ export default class Main extends React.Component {
                 </header>
                 <main>
                     <AddContainer />
+                    <section className='justify-content-around'>
+                        <Container />
+                    </section>
                 </main>
             </div>
         )

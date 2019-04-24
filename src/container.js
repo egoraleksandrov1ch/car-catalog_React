@@ -7,8 +7,14 @@ export default class Container extends React.Component {
     };
     render () {
         return (
-            <div>
-                
+            <div className='card' style={ {width: '400px',} }>
+                <img src='img/cla.jpeg' className='card-img-top' />
+                <div className='card-body'>
+                    <h5 className='card-title'>
+                        mercedes
+                    </h5>
+                    <p>lorem</p>
+                </div>
             </div>
         )
     };
