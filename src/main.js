@@ -9,6 +9,7 @@ const catalog = [
         color: 'white',
         productionYear: '2019',
         typeOfFuel: 'petrol',
+        volumeOfCar: '1.6',
         specifications: [],
         price: '35600',
         carDescription: 'New car',
@@ -20,6 +21,7 @@ const catalog = [
         color: 'white',
         productionYear: '2017',
         typeOfFuel: 'diesel',
+        volumeOfCar: '3',
         specifications: [],
         price: '69500',
         carDescription: 'Original PTS. 1 owner Guaranteed by the manufacturer. Factory paintwork. Full set of keys',
@@ -31,6 +33,7 @@ const catalog = [
         color: 'gray',
         productionYear: '2012',
         typeOfFuel: 'petrol',
+        volumeOfCar: '3.5',
         specifications: [],
         price: '41850',
         carDescription: 'The car is in perfect condition, all in its own paint, one owner! All history service from an authorized dealer, original mileage. Maximum grade! Rich equipment. Beautiful car with a small and original mileage only for you at the authorized BMW dealer.',
@@ -42,10 +45,11 @@ const catalog = [
         color: 'green',
         productionYear: '2003',
         typeOfFuel: 'petrol',
+        volumeOfCar: '2.7',
         specifications: [],
         price: '12500',
         carDescription: 'Boxster in good condition. In Belarus since 2011 from the USA. There are photos from the auction which came. Reaches the Alps and back without any problems! Checked;) Mid-motor classic on the mechanics, a rare color Dark Teal. Motor 2.7 is the most trouble-free and reliable - not subject to bully. No leaks and no problems. All ownership history is on the drive. Just do not ride. For the winter in the garage. I answer only the adequate questions of people who understand. The price is discussed in the presence of money, I will consider exchange options.',
-        photoCar: 'img/'
+        photoCar: 'img/boxster.jpeg'
     },
     {
         carManufacturer: 'Porsche',
@@ -53,6 +57,7 @@ const catalog = [
         color: 'blue',
         productionYear: '2016',
         typeOfFuel: 'diesel',
+        volumeOfCar: '3',
         specifications: [],
         price: '48900',
         carDescription: 'none',
@@ -64,6 +69,7 @@ const catalog = [
         color: 'silver',
         productionYear: '2018',
         typeOfFuel: 'petrol',
+        volumeOfCar: '4',
         specifications: [],
         price: '195000',
         carDescription: 'none',
@@ -75,6 +81,7 @@ const catalog = [
         color: 'silver',
         productionYear: '2017',
         typeOfFuel: 'electric',
+        volumeOfCar: '-',
         specifications: [],
         price: '119227',
         carDescription: 'Uragan: 3.1 seconds up to 100 km / h. Power - 772 hp PURCHASE ON CREDIT / LEASING IS POSSIBLE European version: 8 years warranty for the battery, engines and drive, 4 years for everything else.',
@@ -86,6 +93,7 @@ const catalog = [
         color: 'red',
         productionYear: '2016',
         typeOfFuel: 'electric',
+        volumeOfCar: '-',
         specifications: [],
         price: '63500',
         carDescription: 'none',
@@ -97,6 +105,7 @@ const catalog = [
         color: 'red',
         productionYear: '2018',
         typeOfFuel: 'electric',
+        volumeOfCar: '-',
         specifications: [],
         price: '69900',
         carDescription: 'none',
@@ -108,6 +117,7 @@ const catalog = [
         color: 'yellow',
         productionYear: '2018',
         typeOfFuel: 'petrol',
+        volumeOfCar: '5.2',
         specifications: [],
         price: '153625',
         carDescription: 'New car from the warehouse of the official dealer in Moscow. Delivery to Minsk insured by auto. Price is excluding delivery of the car to the Republic of Belarus. Exact information on a complete set and on existence specify at our managers. It is possible to purchase a car in leasing, credit. Call!',
@@ -119,6 +129,7 @@ const catalog = [
         color: 'black',
         productionYear: '2011',
         typeOfFuel: 'petrol',
+        volumeOfCar: '3',
         specifications: [],
         price: '24700',
         carDescription: 'Pre-call to view this vehicle. Regardless of the weather, you can comfortably and carefully inspect the car that interests you in our car dealership. We will be happy to answer all your questions. We invite you to Test Drive! Ability to pass any service station.',
@@ -130,6 +141,7 @@ const catalog = [
         color: 'blue',
         productionYear: '2018',
         typeOfFuel: 'petrol',
+        volumeOfCar: '2',
         specifications: [],
         price: '30846',
         carDescription: 'New car from the warehouse of the official dealer in Moscow. Delivery to Minsk insured by auto. Price is excluding delivery of the car to the Republic of Belarus. Exact information on a complete set and on existence specify at our managers. It is possible to purchase a car in leasing, credit. Call!',
@@ -140,10 +152,24 @@ export default class Main extends React.Component {
     constructor (props) {
         super(props)
         this.state = {
-            
+            catalogArr: [],
         };
     };
+    componentDidMount () {
+        let newArr = [...catalog];
+        this.setState({
+            catalogArr: newArr,
+        }, () => console.log(this.state.catalogArr));
+    };
     render () {
+        let newContainer = this.state.catalogArr.map( (car, index) => {
+            return (
+                <Container 
+                    key={index}
+                    car={car}
+                />
+            )
+        });
         return (
             <div>
                 <header>
@@ -198,8 +224,8 @@ export default class Main extends React.Component {
                 </header>
                 <main>
                     <AddContainer />
-                    <section className='justify-content-around'>
-                        <Container />
+                    <section className='d-flex justify-content-around flex-wrap'>
+                        {newContainer}
                     </section>
                 </main>
             </div>
