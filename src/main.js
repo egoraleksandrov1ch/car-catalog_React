@@ -153,13 +153,23 @@ export default class Main extends React.Component {
         super(props)
         this.state = {
             catalogArr: [],
+            nameCar: [],
         };
     };
     componentDidMount () {
         let newArr = [...catalog];
+        let arrTwo = [];
+        let name;
+        for (let i = 0; i < newArr.length; i++) {
+            if(newArr[i].carManufacturer !== name) {
+                name = newArr[i].carManufacturer;
+                arrTwo.push(name);
+            }
+        }
         this.setState({
             catalogArr: newArr,
-        }, () => console.log(this.state.catalogArr));
+            nameCar: arrTwo,
+        }, () => console.log(this.state.nameCar));
     };
     render () {
         let newContainer = this.state.catalogArr.map( (car, index) => {
@@ -170,11 +180,18 @@ export default class Main extends React.Component {
                 />
             )
         });
+        let nameCar = this.state.nameCar.map( (car) => {
+            return (
+                <a href='#' className='dropdown-item'>
+                    {car}
+                </a>
+            )
+        });
         return (
             <div>
                 <header>
                     <nav className='navbar navbar-expand-lg navbar-light bg-light'>
-                        <a className='navbar-brand'  href='#'>Car-catalog</a>
+                        <a className='navbar-brand' href='#'>Car-catalog</a>
                         <button 
                             className='navbar-toggler' 
                             type='button'
@@ -204,7 +221,7 @@ export default class Main extends React.Component {
                                         Car manufacturer
                                     </a>
                                     <div className='dropdown-menu' aria-labelledby='navbarDropdown'>
-                                        {/* name car teg */}
+                                        {nameCar}
                                     </div>
                                 </li>
                                 <li className='nav-item'>

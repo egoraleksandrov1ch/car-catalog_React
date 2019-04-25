@@ -26,7 +26,7 @@ export default class Container extends React.Component {
                         Color: {this.props.car.color}
                     </p>
                     <p className='card-text'>
-                        Production year: {this.props.car.productionYear} year
+                        Production year: {this.props.car.productionYear}
                     </p>
                     <p className='card-text' style={{display:this.state.view ? 'none' : 'block'}}>
                         Type of fuel: {this.props.car.typeOfFuel}
