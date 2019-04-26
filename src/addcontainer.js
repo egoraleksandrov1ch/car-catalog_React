@@ -3,7 +3,89 @@ import React from 'react';
 export default class AddContainer extends React.Component {
     constructor (props) {
         super(props)
-        
+        this.state = {
+            carManufacturer: '',
+            carModel: '',
+            color: '',
+            productionYear: '',
+            typeOfFuel: '',
+            volumeOfCar: '',
+            price: '',
+            carDescription: '',
+        }
+        this.carManufacturer = this.carManufacturer.bind(this);
+        this.carModel = this.carModel.bind(this);
+        this.color = this.color.bind(this);
+        this.productionYear = this.productionYear.bind(this);
+        this.typeOfFuel = this.typeOfFuel.bind(this);
+        this.volumeOfCar = this.volumeOfCar.bind(this);
+        this.price = this.price.bind(this);
+        this.carDescription = this.carDescription.bind(this);
+        this.addNewContainer = this.addNewContainer.bind(this);
+    };
+    addNewContainer () {
+        let newCar = {
+            carManufacturer: this.state.carManufacturer,
+            carModel: this.state.carModel,
+            color: this.state.color,
+            productionYear: this.state.productionYear,
+            typeOfFuel: this.state.typeOfFuel,
+            volumeOfCar: this.state.volumeOfCar,
+            price: this.state.price,
+            carDescription: this.state.carDescription,
+            photoCar: 'img/cla.jpeg'
+        }
+        this.props.newCar(newCar);
+        this.setState({
+            carManufacturer: '',
+            carModel: '',
+            color: '',
+            productionYear: '',
+            typeOfFuel: '',
+            volumeOfCar: '',
+            price: '',
+            carDescription: '',
+        });
+    };
+    carManufacturer (e) {
+        this.setState({
+            carManufacturer: e.target.value,
+        });
+    };
+    carModel (e) {
+        this.setState({
+            carModel: e.target.value,
+        });
+    };
+    color (e) {
+        this.setState({
+            color: e.target.value,
+        });
+    };
+    productionYear (e) {
+        this.setState({
+            productionYear: e.target.value,
+        });
+    };
+    typeOfFuel (e) {
+        this.setState({
+            typeOfFuel: e.target.value,
+        });
+    }
+    volumeOfCar (e) {
+        this.setState({
+            volumeOfCar: e.target.value,
+        });
+    };
+    price (e) {
+        this.setState({
+            price: e.target.value,
+        });
+    };
+    carDescription (e) {
+        this.setState({
+            carDescription: e.target.value,
+        });
     };
     render () {
         return (
@@ -44,7 +126,9 @@ export default class AddContainer extends React.Component {
                                         className='form-control' 
                                         placeholder='Car manufacturer' 
                                         aria-label='carManufacturer' 
-                                        aria-describedby='basic-addon1' 
+                                        aria-describedby='basic-addon1'
+                                        value={this.state.carManufacturer}
+                                        onChange={this.carManufacturer}
                                         required
                                     />
                                 </div>
@@ -55,7 +139,9 @@ export default class AddContainer extends React.Component {
                                         className='form-control' 
                                         placeholder='Car model' 
                                         aria-label='carModel' 
-                                        aria-describedby='basic-addon1' 
+                                        aria-describedby='basic-addon1'
+                                        value={this.state.carModel}
+                                        onChange={this.carModel}
                                         required
                                     />
                                 </div>
@@ -66,7 +152,9 @@ export default class AddContainer extends React.Component {
                                         className='form-control' 
                                         placeholder='Color' 
                                         aria-label='color' 
-                                        aria-describedby='basic-addon1' 
+                                        aria-describedby='basic-addon1'
+                                        value={this.state.color}
+                                        onChange={this.color}
                                     />
                                 </div>
 
@@ -76,24 +164,24 @@ export default class AddContainer extends React.Component {
                                         className='form-control' 
                                         placeholder='Production year' 
                                         aria-label='productionYear' 
-                                        aria-describedby='basic-addon1' 
+                                        aria-describedby='basic-addon1'
+                                        value={this.state.productionYear}
+                                        onChange={this.productionYear}
                                         required
                                     />
                                 </div>
 
                                 <div className='input-group mb-3'> {/* Type of fuel */}
-                                    <div className='input-group-prepend'>
-                                        <label className='input-group-text' htmlFor='inputGroupSelect'>
-                                            Type of fuel
-                                        </label>
-                                    </div>
-                                    <select className='custom-select' id='inputGroupSelect'>
-                                        <option selected>Choose..</option>
-                                        <option value='1'>petrol</option>
-                                        <option value='2'>diesel</option>
-                                        <option value='3'>gas</option>
-                                        <option value='4'>electric</option>
-                                    </select>
+                                    <input 
+                                        type='text' 
+                                        className='form-control' 
+                                        placeholder='Type of fuel' 
+                                        aria-label='typeOfFuel' 
+                                        aria-describedby='basic-addon1'
+                                        value={this.state.typeOfFuel}
+                                        onChange={this.typeOfFuel}
+                                        required
+                                    />
                                 </div>
 
                                 <div className='input-group mb-3'> {/* Volume of car */}
@@ -102,7 +190,9 @@ export default class AddContainer extends React.Component {
                                         className='form-control' 
                                         placeholder='Volume of car' 
                                         aria-label='volumeOfCar' 
-                                        aria-describedby='basic-addon1' 
+                                        aria-describedby='basic-addon1'
+                                        value={this.state.volumeOfCar}
+                                        onChange={this.volumeOfCar}
                                         required
                                     />
                                     <div className='input-group-append'>
@@ -110,115 +200,6 @@ export default class AddContainer extends React.Component {
                                             L
                                         </span>
                                     </div>
-                                </div>
-
-                                <div className='input-group mb-3 justify-content-around'> {/* Specifications */}
-
-                                    <div className='flex-column'> {/* First block specifications */}
-                                        <div className='form-check'>
-                                            <input 
-                                                type='checkbox' 
-                                                className='form-check-input' 
-                                                value='' 
-                                                id='defaultCheck1' 
-                                            />
-                                            <label className='form-check-label' htmlFor='defaultCheck1'>
-                                                Air conditioning
-                                            </label>
-                                        </div>
-                                        <div className='form-check'>
-                                            <input 
-                                                type='checkbox' 
-                                                className='form-check-input' 
-                                                value='' 
-                                                id='defaultCheck2' 
-                                            />
-                                            <label className='form-check-label' htmlFor='defaultCheck2'>
-                                                Leather interior
-                                            </label>
-                                        </div>
-                                        <div className='form-check'>
-                                            <input 
-                                                type='checkbox' 
-                                                className='form-check-input' 
-                                                value='' 
-                                                id='defaultCheck3' 
-                                            />
-                                            <label className='form-check-label' htmlFor='defaultCheck3'>
-                                                Alloy wheels
-                                            </label>
-                                        </div>
-                                        <div className='form-check'>
-                                            <input 
-                                                type='checkbox' 
-                                                className='form-check-input' 
-                                                value='' 
-                                                id='defaultCheck4' 
-                                            />
-                                            <label className='form-check-label' htmlFor='defaultCheck4'>    
-                                                Xenon
-                                            </label>
-                                        </div>
-                                        <div className='form-check'>
-                                            <input 
-                                                type='checkbox' 
-                                                className='form-check-input' 
-                                                value='' 
-                                                id='defaultCheck5' 
-                                            />
-                                            <label className='form-check-label' htmlFor='defaultCheck5'>    
-                                                Parktronic
-                                            </label>
-                                        </div>
-                                    </div>
-
-                                    <div className='flex-column'> {/* Second block specifications */}
-                                        <div className='form-check'>
-                                            <input 
-                                                type='checkbox' 
-                                                className='form-check-input' 
-                                                value='' 
-                                                id='defaultCheck6' 
-                                            />
-                                            <label className='form-check-label' htmlFor='defaultCheck6'>    
-                                                Heated seats
-                                            </label>
-                                        </div>
-                                        <div className='form-check'>
-                                            <input 
-                                                type='checkbox' 
-                                                className='form-check-input' 
-                                                value='' 
-                                                id='defaultCheck7' 
-                                            />
-                                            <label className='form-check-label' htmlFor='defaultCheck7'> 
-                                                Stability Control System
-                                            </label>
-                                        </div>
-                                        <div className='form-check'>
-                                            <input 
-                                                type='checkbox' 
-                                                className='form-check-input' 
-                                                value='' 
-                                                id='defaultCheck8' 
-                                            />
-                                            <label className='form-check-label' htmlFor='defaultCheck8'> 
-                                                Navigation
-                                            </label>
-                                        </div>
-                                        <div className='form-check'>
-                                            <input 
-                                                type='checkbox' 
-                                                className='form-check-input' 
-                                                value='' 
-                                                id='defaultCheck9' 
-                                            />
-                                            <label className='form-check-label' htmlFor='defaultCheck9'>
-                                                Speakerphone
-                                            </label>
-                                        </div>
-                                    </div>
-
                                 </div>
 
                                 <div className='input-group mb-3'> {/* Price */}
@@ -230,7 +211,9 @@ export default class AddContainer extends React.Component {
                                     <input 
                                         type='text' 
                                         className='form-control' 
-                                        placeholder='Price' 
+                                        placeholder='Price'
+                                        value={this.state.price}
+                                        onChange={this.price}
                                         required
                                     />
                                     <div className='input-group-append'>
@@ -241,7 +224,12 @@ export default class AddContainer extends React.Component {
                                 </div>
 
                                 <div className='input-group'> {/* Car description */}
-                                    <textarea className='form-control' placeholder='Car description'>
+                                    <textarea 
+                                        className='form-control' 
+                                        placeholder='Car description'
+                                        value={this.state.carDescription}
+                                        onChange={this.carDescription}
+                                    >
 
                                     </textarea>
                                 </div>
@@ -273,7 +261,7 @@ export default class AddContainer extends React.Component {
                             <button 
                                 type='submit' 
                                 className='btn btn-outline-success'
-                                
+                                onClick={this.addNewContainer}
                             >
                                 Save changes
                             </button>

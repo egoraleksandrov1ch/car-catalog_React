@@ -26,7 +26,7 @@ export default class Container extends React.Component {
                         Color: {this.props.car.color}
                     </p>
                     <p className='card-text'>
-                        Production year: {this.props.car.productionYear}
+                        Price: {this.props.car.price} $
                     </p>
                     <p className='card-text' style={{display:this.state.view ? 'none' : 'block'}}>
                         Type of fuel: {this.props.car.typeOfFuel}
@@ -35,10 +35,7 @@ export default class Container extends React.Component {
                         Volume of car: {this.props.car.volumeOfCar} L
                     </p>
                     <p className='card-text' style={{display:this.state.view ? 'none' : 'block'}}>
-                        Specifications
-                    </p>
-                    <p className='card-text' style={{display:this.state.view ? 'none' : 'block'}}>
-                        Price: {this.props.car.price} $
+                        Production year: {this.props.car.productionYear}
                     </p>
                     <p className='card-text' style={{display:this.state.view ? 'none' : 'block'}}>
                         Description: {this.props.car.carDescription}
