@@ -12,6 +12,7 @@ export default class AddContainer extends React.Component {
             volumeOfCar: '',
             price: '',
             carDescription: '',
+            carPhoto: '',
         }
         this.carManufacturer = this.carManufacturer.bind(this);
         this.carModel = this.carModel.bind(this);
@@ -21,6 +22,7 @@ export default class AddContainer extends React.Component {
         this.volumeOfCar = this.volumeOfCar.bind(this);
         this.price = this.price.bind(this);
         this.carDescription = this.carDescription.bind(this);
+        this.carPhoto = this.carPhoto.bind(this);
         this.addNewContainer = this.addNewContainer.bind(this);
     };
     addNewContainer () {
@@ -33,7 +35,7 @@ export default class AddContainer extends React.Component {
             volumeOfCar: this.state.volumeOfCar,
             price: this.state.price,
             carDescription: this.state.carDescription,
-            photoCar: 'img/cla.jpeg'
+            photoCar: this.state.carPhoto
         }
         this.props.newCar(newCar);
         this.setState({
@@ -45,6 +47,7 @@ export default class AddContainer extends React.Component {
             volumeOfCar: '',
             price: '',
             carDescription: '',
+            carPhoto: '',
         });
     };
     carManufacturer (e) {
@@ -87,6 +90,11 @@ export default class AddContainer extends React.Component {
             carDescription: e.target.value,
         });
     };
+    carPhoto (e) {
+        this.setState({
+            carPhoto: e.target.value,
+        }, () => console.log(this.state.carPhoto));
+    }
     render () {
         return (
             <div 
@@ -242,7 +250,9 @@ export default class AddContainer extends React.Component {
                                         type='file' 
                                         className='form-control-file' 
                                         id='exampleFormControlFile1' 
-                                        accept='image/jpeg, image/png' 
+                                        accept='image/jpeg, image/png'
+                                        value={this.state.carPhoto}
+                                        onChange={this.carPhoto}
                                         required
                                     />
                                 </div>
@@ -261,6 +271,7 @@ export default class AddContainer extends React.Component {
                             <button 
                                 type='submit' 
                                 className='btn btn-outline-success'
+                                data-dismiss='modal'
                                 onClick={this.addNewContainer}
                             >
                                 Save changes

@@ -143,6 +143,8 @@ export default class Main extends React.Component {
             catalogArr: [],
             nameCar: [],
         };
+        this.newCar = this.newCar.bind(this);
+        this.editPrice = this.editPrice.bind(this);
     };
     componentDidMount () {
         let newArr = [...catalog];
@@ -159,23 +161,26 @@ export default class Main extends React.Component {
             nameCar: arrTwo,
         }, () => console.log(this.state.catalogArr));
     };
-    // newCar (car) {
-    //     let newArr = [...this.state.catalogArr];
-    //     newArr.push(car);
-    //     console.log(this.state.catalogArr);
-    //     let arrTwo = [];
-    //     let name;
-    //     for (let i = 0; i < newArr.length; i++) {
-    //         if(newArr[i].carManufacturer !== name) {
-    //             name = newArr[i].carManufacturer;
-    //             arrTwo.push(name);
-    //         }
-    //     }
-    //     this.setState({
-    //         catalogArr: newArr,
-    //         nameCar: arrTwo,
-    //     });
-    // };
+    editPrice () {
+
+    };
+    newCar (car) {
+        let newArr = [...this.state.catalogArr];
+        newArr.push(car);
+        console.log(this.state.catalogArr);
+        let arrTwo = [];
+        let name;
+        for (let i = 0; i < newArr.length; i++) {
+            if(newArr[i].carManufacturer !== name) {
+                name = newArr[i].carManufacturer;
+                arrTwo.push(name);
+            }
+        }
+        this.setState({
+            catalogArr: newArr,
+            nameCar: arrTwo,
+        });
+    };
     render () {
         let newContainer = this.state.catalogArr.map( (car, index) => {
             return (
@@ -187,7 +192,12 @@ export default class Main extends React.Component {
         });
         let nameCar = this.state.nameCar.map( (car,index) => {
             return (
-                <a href='#' className='dropdown-item' key={index}>
+                <a 
+                    href='#' 
+                    className='dropdown-item' 
+                    key={index}
+
+                >
                     {car}
                 </a>
             )
@@ -230,7 +240,13 @@ export default class Main extends React.Component {
                                     </div>
                                 </li>
                                 <li className='nav-item'>
-                                    <a href='#' className='nav-link'>Price</a>
+                                    <a 
+                                        href='#' 
+                                        className='nav-link'
+                                        onClick={this.editPrice}
+                                    >
+                                        Price 
+                                    </a>
                                 </li>
                             </ul>
                             <button 
