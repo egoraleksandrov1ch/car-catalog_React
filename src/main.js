@@ -141,12 +141,17 @@ export default class Main extends React.Component {
         super(props)
         this.state = {
             catalogArr: [],
+            catalogArrTwo :[],
             nameCar: [],
+            clickPrice: 0,
+            arrow: ''
         };
         this.newCar = this.newCar.bind(this);
         this.editPrice = this.editPrice.bind(this);
+        this.allCar = this.allCar.bind(this);
+        this.sortNameCar = this.sortNameCar.bind(this);
     };
-    componentDidMount () {
+    componentDidMount () { {/* here is a request for a car list */}
         let newArr = [...catalog];
         let arrTwo = [];
         let name;
@@ -158,13 +163,60 @@ export default class Main extends React.Component {
         }
         this.setState({
             catalogArr: newArr,
+            catalogArrTwo: newArr,
             nameCar: arrTwo,
         }, () => console.log(this.state.catalogArr));
     };
-    editPrice () {
-
+    allCar () { {/* return the entire list of cars in the original position */}
+        let newArr = this.state.catalogArrTwo.concat([]);
+        this.setState({
+            catalogArr: newArr,
+            clickPrice: 0,
+            arrow: '',
+        });
+    }
+    editPrice () { {/* sorting by price */}
+        if (this.state.clickPrice == 0) {
+            let newArr = this.state.catalogArr.concat([]);
+            newArr.sort((a,b) => {
+                if(+a.price > +b.price){
+                    return 1
+                }
+                else {
+                    return -1
+                }
+            });
+            this.setState({
+                clickPrice: this.state.clickPrice + 1,
+                arrow: '↑',
+                catalogArr: newArr
+            });
+        }
+        else if (this.state.clickPrice == 1) {
+            let newArr = this.state.catalogArr.concat([]);
+            newArr.sort((a,b) => {
+                if(+a.price > +b.price){
+                    return -1
+                }
+                else {
+                    return 1
+                }
+            });
+            this.setState({
+                clickPrice: this.state.clickPrice + 1,
+                arrow: '↓',
+                catalogArr: newArr
+            });
+        }
+        else if (this.state.clickPrice == 2) {
+            this.setState({
+                clickPrice: 0,
+                arrow: '',
+                catalogArr: this.state.catalogArrTwo,
+            });
+        }
     };
-    newCar (car) {
+    newCar (car) {  {/* add new car */}
         let newArr = [...this.state.catalogArr];
         newArr.push(car);
         console.log(this.state.catalogArr);
@@ -178,9 +230,13 @@ export default class Main extends React.Component {
         }
         this.setState({
             catalogArr: newArr,
+            catalogArrTwo: newArr,
             nameCar: arrTwo,
         });
     };
+    sortNameCar (car) { {/* filtering by manufacturer and brand */}
+        
+    }
     render () {
         let newContainer = this.state.catalogArr.map( (car, index) => {
             return (
@@ -192,14 +248,14 @@ export default class Main extends React.Component {
         });
         let nameCar = this.state.nameCar.map( (car,index) => {
             return (
-                <a 
-                    href='#' 
-                    className='dropdown-item' 
+                <button 
+                    
+                    className='dropdown-item btn btn-outline-success' 
                     key={index}
-
+                    onClick={this.sortNameCar(car)}
                 >
                     {car}
-                </a>
+                </button>
             )
         });
         return (
@@ -221,7 +277,13 @@ export default class Main extends React.Component {
                         <div className='collapse navbar-collapse' id='navbarSupportedContent'>
                             <ul className='navbar-nav mr-auto'>
                                 <li className='nav-item'>
-                                    <a href='#' className='nav-link'>All car</a>
+                                    <a 
+                                        href='#' 
+                                        className='nav-link'
+                                        onClick={this.allCar}
+                                    >
+                                        All car
+                                    </a>
                                 </li>
                                 <li className='nav-item dropdown'>
                                     <a 
@@ -245,7 +307,7 @@ export default class Main extends React.Component {
                                         className='nav-link'
                                         onClick={this.editPrice}
                                     >
-                                        Price 
+                                        Price {this.state.arrow}
                                     </a>
                                 </li>
                             </ul>
